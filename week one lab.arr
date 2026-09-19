@@ -27,3 +27,10 @@ p
 p * 0.1
 
 #| Forgetting the parentheses in the perimiter equation would cause and error becuase the two operations are that the same grouping level, which causes the system to have difficulty deciding the order of operations |#
+
+
+#String Suprises
+#Tagling
+"Designs for everyone!"
+Designs for everyone!"
+  
