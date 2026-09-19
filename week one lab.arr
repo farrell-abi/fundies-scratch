@@ -33,4 +33,15 @@ p * 0.1
 #Tagling
 "Designs for everyone!"
 "Designs for everyone!"
-  
+
+#color inventory
+"red"
+'blue'
+"gold"
+
+'red' + 'blue'
+#| When you add (+) string together, the words just combine/are sat next to eachother.|#
+
+# 1 + 'blue'
+
+#| When you add (+) 1 + 'blue', you create an error because you cannot combine a value and a string as the system processes the two inventories (idk if that is the right word) in different ways.|#
