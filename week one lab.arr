@@ -65,3 +65,8 @@ rectangle(50, 20, 'solid', 'black')
 #circle(30, solid, 'red')
 #| the issue is that the string for the opactiy is not in quotations.|#
 circle(30,'solid', 'red')
+
+#Create a Flag or Shield#
+s = rotate(45, square(100, 'solid', 'gray'))
+t = overlay(star(40, 'solid', 'yellow'), circle(50, "solid", 'blue'))
+overlay(t, s)
