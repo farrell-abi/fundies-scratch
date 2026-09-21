@@ -45,3 +45,23 @@ p * 0.1
 # 1 + 'blue'
 
 #| When you add (+) 1 + 'blue', you create an error because you cannot combine a value and a string as the system processes the two inventories (idk if that is the right word) in different ways.|#
+
+#Traffic light
+r = rectangle(40, 120, "solid", "black")
+b = above(circle(20, 'solid', 'red'), circle(20, 'solid', 'yellow'))
+c = above(b, circle(20, 'solid', 'green'))
+d = overlay(c, r)
+below(rectangle(10, 40, 'solid', 'gray'), d)
+
+#| So I don't know who to make the black rectangle start at the top of the red circle, or alernatively, for the red circle to start at the top of the balck rectangle. Either way, I think that this is pretty good, so...|#
+
+#Broken Code Hunt
+
+# Goal: A rectangle with width 50 and height 20, solid black
+#rectangle(50, "solid", 20, "black")
+#the fix is to switch the order of the inputs to (width, height, solid/outline, color)
+rectangle(50, 20, 'solid', 'black')
+
+#circle(30, solid, 'red')
+#| the issue is that the string for the opactiy is not in quotations.|#
+circle(30,'solid', 'red')
