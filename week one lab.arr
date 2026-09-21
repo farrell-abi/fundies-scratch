@@ -49,7 +49,9 @@ c = above(b, circle(20, 'solid', 'green'))
 d = overlay-xy(c, -5, 0, r)
 below(rectangle(10, 40, 'solid', 'gray'), d)
 
-#| So I don't know who to make the black rectangle start at the top of the red circle, or alernatively, for the red circle to start at the top of the balck rectangle. Either way, I think that this is pretty good, so...|#
+#| So I don't know who to make the black rectangle start at the top of the red circle, or alernatively, for the red circle to start at the top of the balck rectangle. Either way, I think that this is pretty good, so...
+
+   P.S. I figured it out. :)|#
 
 #Broken Code Hunt
 
