@@ -1,6 +1,6 @@
 use context starter2024
 #|T-Shirt Shop
-Note: for the sake of my sanity I will be using the American dollar sign ($) becuase I am too lazy to find the pound symbol and type it every time. Thank you in advance for using your imagination and pretenting it is the pound sign. :)
+   Note: for the sake of my sanity I will be using the American dollar sign ($) because I am too lazy to find the pound symbol and type it every time. Thank you in advance for using your imagination and pretenting it is the pound sign. :)
 $12 per shirt + $3 setup fee per design|#
 
 #Calculating Cost
@@ -49,7 +49,7 @@ c = above(b, circle(20, 'solid', 'green'))
 d = overlay-xy(c, -5, 0, r)
 below(rectangle(10, 40, 'solid', 'gray'), d)
 
-#| So I don't know who to make the black rectangle start at the top of the red circle, or alernatively, for the red circle to start at the top of the balck rectangle. Either way, I think that this is pretty good, so...
+#| So I don't know who to make the black rectangle start at the top of the red circle, or alternatively, for the red circle to start at the top of the black rectangle. Either way, I think that this is pretty good, so...
 
    P.S. I figured it out. :)|#
 
@@ -61,7 +61,7 @@ below(rectangle(10, 40, 'solid', 'gray'), d)
 rectangle(50, 20, 'solid', 'black')
 
 #circle(30, solid, 'red')
-#| the issue is that the string for the opactiy is not in quotations.|#
+#| the issue is that the string for the opacity is not in quotations.|#
 circle(30,'solid', 'red')
 
 #Create a Flag or Shield#
