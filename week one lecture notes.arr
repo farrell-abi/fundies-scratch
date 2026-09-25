@@ -14,7 +14,7 @@ string-repeat(b, 3)
 
 #to convert all string characters to upper case
 string-to-upper("hello cs2000!") # -> HELLO CS2000!
-string-toupper("hellow cs2000!") # same thing
+string-toupper("hello cs2000!") # same thing
 
 #to convert all string characters to lower case
 string-to-lower("WELCOME TO CS2000!")
