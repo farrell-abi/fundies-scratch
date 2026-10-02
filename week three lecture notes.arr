@@ -94,3 +94,12 @@ class-exercises = load-table:
   source: csv-table-url("https://raw.githubusercontent.com/NU-London/LCSCI4207-datasets/refs/heads/main/plant_sightings.csv", default-options)
 end
 
+glucose-levels = load-table:
+  patient_id :: Number,
+  glucose_level :: Number,
+  date_time :: Number,
+  insulin_dose :: Number,
+  exercise_duration :: Number,
+  stress_level :: Number
+  source: csv-table-file("glucose_levels.csv", default-options)
+end
