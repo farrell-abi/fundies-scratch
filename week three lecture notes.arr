@@ -31,4 +31,4 @@ fun choose-outfit(temp-in-C :: Number) -> String:
   add-glasses(s)
 end
 
-#LECTURE 2
+#LECTURE 2 - something about tabels
