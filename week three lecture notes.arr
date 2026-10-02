@@ -1,4 +1,8 @@
-use context starter2024
+use context dcic2024
+#for lecture two
+include csv
+include data-source
+
 #LECTURE 1 - class exercises
 fun choose-hat(temp-in-C :: Number) -> String:
   doc: "determines appropriate head gear, with above 27C a sun hat, below 10C a winter hat"
@@ -58,3 +62,35 @@ end
 second-workout = workouts.row-n(1)
 second-workout["activity"] # -> 'Yoga'
 workouts.row-n(1)['duration'] # -> 45
+
+
+recipes = load-table:
+  title :: String,
+  servings :: Number,
+  prep-time :: Number
+  source: csv-table-url("https://raw.githubusercontent.com/NU-London/LCSCI4207-datasets/refs/heads/main/recipes.csv", default-options)
+end
+
+world-bank = load-table:
+  country :: String,
+  life-exp :: Number,
+  gdp :: Number
+  source: csv-table-url("https://raw.githubusercontent.com/NU-London/LCSCI4207-datasets/refs/heads/main/life_exp_gdp.csv", default-options)
+  sanitize life-exp using num-sanitizer
+  sanitize gdp using num-sanitizer
+end
+
+#lr-plot(world-bank, "gdp", "life-exp")
+
+#Lecture 2 - Class Exercises
+class-exercises = load-table:
+  plant-common-name :: String,
+  location-latitude :: Number,
+  location-logitude :: Number,
+  date-sighted :: Number,
+  soil-type :: String,
+  plant-height-cm :: Number,
+  plant-color :: String
+  source: csv-table-url("https://raw.githubusercontent.com/NU-London/LCSCI4207-datasets/refs/heads/main/plant_sightings.csv", default-options)
+end
+
