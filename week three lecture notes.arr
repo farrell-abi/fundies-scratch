@@ -32,3 +32,29 @@ fun choose-outfit(temp-in-C :: Number) -> String:
 end
 
 #LECTURE 2 - something about tabels
+workouts = table: date :: String, activity :: String, duration :: Number
+  row: "2025-04-01", "Running", 30
+  row: "2025-04-02", "Yoga", 45
+  row: "2025-04-03", "Cycling", 60
+end
+
+check:
+  table: date :: String, activity :: String, duration :: Number
+    row: "2025-04-01", "Running", 30
+  row: "2025-04-02", "Yoga", 45
+  row: "2025-04-03", "Cycling", 60
+  end
+  is-not
+  table: date :: String, activity :: String, duration :: Number
+    row: "2025-04-03", "Cycling", 60
+    row: "2025-04-01", "Running", 30
+    row: "2025-04-02", "Yoga", 45
+  end
+end
+
+#| extracting rows and column values from a table - table-identifier.row-n(N) for some N. the first row is numbered 0. From a row, extract colum values using 
+   row-identifier["column-name"]|#
+
+second-workout = workouts.row-n(1)
+second-workout["activity"] # -> 'Yoga'
+workouts.row-n(1)['duration'] # -> 45
