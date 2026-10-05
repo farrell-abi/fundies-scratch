@@ -1,4 +1,7 @@
-use context starter2024
+use context dcic2024
+
+include csv
+include data-source
 
 #Problem 1 - determine if a given year is a leap year
 
@@ -77,6 +80,24 @@ mars["Distance"]
 #Problem 5 - Official Bank Rate history data from the Bank of England (1844-)
 
 something = load-table:
-  source: csc-table-file('datasets/', default options)
-    
+  year :: Number,
+  day :: Number,
+  month :: Number,
+  rate :: Number
+  source: csv-table-file('datasets/boe_rates.csv', default-options)
+  sanitize year using num-sanitizer
+  sanitize day using num-sanitizer
+  sanitize rate using num-sanitizer
 end
+
+something.length() # -> there are 835 rows in table something
+
+mean(something, 'rate') # -> ~5.928241
+
+median(something, 'rate') # -> 5
+
+order-by(something, 'rate', false)
+# Maximum rate is 17 on 15 November 1979
+
+order-by(something, 'rate', true)
+# Minimum rate is 0.1 on 19 March 2020
