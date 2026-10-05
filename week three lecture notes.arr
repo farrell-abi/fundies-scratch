@@ -101,5 +101,5 @@ glucose-levels = load-table:
   insulin_dose :: Number,
   exercise_duration :: Number,
   stress_level :: Number
-  source: csv-table-file("glucose_levels.csv", default-options)
+  source: csv-table-file("datasets/glucose_levels.csv", default-options)
 end

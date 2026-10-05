@@ -76,3 +76,7 @@ mars["Distance"]
 
 #Problem 5 - Official Bank Rate history data from the Bank of England (1844-)
 
+something = load-table:
+  source: csc-table-file('datasets/', default options)
+    
+end
