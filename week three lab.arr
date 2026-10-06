@@ -92,7 +92,7 @@ end
 
 something.length() # -> there are 835 rows in table something
 
-mean(something, 'rate') # -> ~5.928241
+modes(something, 'rate') # -> 4
 
 median(something, 'rate') # -> 5
 
