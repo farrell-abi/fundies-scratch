@@ -1,2 +1,144 @@
-use context starter2024
+use context dcic2024
+include csv
+include data-source
 
+flights = load-table:
+  rownames :: Number,
+  dep_time :: Number,
+  sched_dep_time :: Number,
+  dep_delay :: Number,
+  arr_time :: Number,
+  sched_arr_time :: Number,
+  arr_delay :: Number,
+  carrier :: String,
+  flight :: String,
+  tailnum :: String,
+  origin :: String,
+  dest :: String,
+  air_time :: Number,
+  distance :: Number,
+  hour :: Number,
+  minute :: Number,
+  time_hour :: String
+  source: csv-table-file("datasets/flights.csv",default-options)
+  sanitize rownames using num-sanitizer
+  sanitize dep_time using num-sanitizer
+  sanitize sched_dep_time using num-sanitizer
+  sanitize dep_delay using num-sanitizer
+  sanitize arr_time using num-sanitizer
+  sanitize sched_arr_time using num-sanitizer
+  sanitize arr_delay using num-sanitizer
+  sanitize air_time using num-sanitizer
+  sanitize distance using num-sanitizer
+  sanitize hour using num-sanitizer
+  sanitize minute using num-sanitizer
+end
+
+#Exercise 1
+fun is_long_flight(row :: Row) -> Boolean:
+  doc:"determines if a given row designates a log flight based on distance travled"
+  row["distance"] >= 1500
+where:
+  is_long_flight(flights.row-n(0)) is false
+  is_long_flight(flights.row-n(36)) is true
+end
+
+long-flights = filter-with(flights, is_long_flight)
+sorted-long = order-by(long-flights, "distance", false)
+
+top = sorted-long.row-n(0)
+top["carrier"]
+top["origin"]
+top["dest"]
+
+#Exercise 2
+fun is_delayed_departure(row :: Row) -> Boolean:
+  doc: "determines if a flight is runnignlate. returns true if the departure delay is at least 30 minutes"
+  row["dep_delay"] >= 30
+end
+
+fun is_morning_sched_dep(row :: Row) -> Boolean:
+  doc:"determines if the scheduled departure is before noon"
+  row["sched_dep_time"] < 1200
+end
+
+delayed = filter-with(flights, lam(r): r["dep_delay"] >= 30 end)
+morning = filter-with(delayed, lam(r): r["sched_dep_time"] < 1200 end)
+far = filter-with(morning,lam(r): r["distance"] > 500 end)
+worst = order-by(far, "dep_delay", false)
+
+w = worst.row-n(0)
+w["flight"]
+w["origin"]
+w["dep_delay"]
+
+#Exercise 3
+fixed-dep = transform-column(flights, "dep_delay", lam(v): if v < 0: 0 else: v end end)
+fixed-both = transform-column(fixed-dep, "arr_delay", lam(v): if v < 0: 0 else: v end end)
+
+with-speed = build-column(fixed-both, "effective_speed",
+  lam(r):
+    if r["air_time"] > 0:
+      r["distance"] / (r["air_time"] / 60)
+    else:
+      0
+    end
+  end)
+
+by-speed = order-by(with-speed, "effective_speed", false)
+f = by-speed.row-n(0)
+f["carrier"]
+f["origin"]
+f["dest"]
+
+#Exercise 4
+fun apply-arrival-discount(t :: Table) -> Table:
+  doc: "Reduces arr_delay by 20% when 0 <= arr_delay <= 45"
+  transform-column(t, "arr_delay",
+    lam(v):
+      if (v >= 0) and (v <= 45):
+        v * 0.8
+      else:
+        v
+      end
+    end)
+where:
+  test-t = table: arr_delay
+    row: -10
+    row: 0
+    row: 30
+    row: 60
+  end
+  expected = table: arr_delay
+    row: -10
+    row: 0
+    row: 24
+    row: 60
+  end
+  apply-arrival-discount(test-t) is expected
+end
+
+discounted = apply-arrival-discount(flights)
+
+scored = build-column(discounted, "on_time_score",
+  lam(r):
+    dep = num-max(0, r["dep_delay"])
+    arr = num-max(0, r["arr_delay"])
+    raw = 100 - (dep - arr) - (r["air_time"] / 30)
+    if raw < 0: 0 else: raw end
+  end)
+
+# Sort by the tie-breaker first, then the main key
+by-distance = order-by(scored, "distance", true)
+ranked = order-by(by-distance, "on_time_score", false)
+
+first = ranked.row-n(0)
+second = ranked.row-n(1)
+first["carrier"]
+first["flight"]
+first["origin"]
+first["dest"]
+second["carrier"]
+second["flight"]
+second["origin"]
+second["dest"]
