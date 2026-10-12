@@ -54,3 +54,65 @@ end
 order-by(is-also-morning, 'time', false)
 
 #I dont know what im doing here
+
+#Lecture two
+
+#|the two opwerations:
+   1 - transform-column:
+   your function takes: one value
+   you get back: same columns, new values in one
+   
+   2 - build-column:
+   your function: one whole Row
+   you get back: one extra column|#
+
+sales = table: item :: String, price :: Number, qty :: Number
+  row: "Tea", 2.50, 4
+  row: "Coffee", 3.00, 2
+  row: "Cake", 4.25, 3
+end
+
+#Transform column
+#add VAT to every price
+fun add-vat(p :: Number) -> Number:
+  doc: "returns the price with 20 percent VAT added"
+  p * 1.2
+where:
+  add-vat(10) is 12
+  add-vat(0) is 0
+end
+
+with-vat = transform-column(sales, "price", add-vat)
+sales.get-column("price")
+with-vat.get-column("price")
+
+also-with-vat = transform-column(sales, "price", lam(v): v * 1.2 end)
+also-with-vat.get-column("price")
+
+#build column
+fun line-total(r :: Row) -> Number:
+  doc: "returns price times quantity for one order line"
+  r["price"] * r["qty"]
+where:
+  line-total(sales.row-n(0)) is 10
+  line-total(sales.row-n(2)) is 12.75
+end
+
+with-total = build-column(sales, "total", line-total)
+with-total.get-column("total")
+
+fun total-w-vat(r :: Row) -> Number:
+  doc: "returns the total with vat included"
+  r['price'] * r['qty'] * 1.2
+where:
+  total-w-vat(sales.row-n(0)) is 12
+end
+
+final-total = build-column(sales, "final total", total-w-vat)
+final-total.get-column("final total")
+
+#chain the two together, operations compose, because each returns a table
+# ADD VAT, then total the VAT-inclusive prices
+
+billed = build-column(transform-column(sales, "price", add-vat), "total", line-total)
+billed
