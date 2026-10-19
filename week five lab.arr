@@ -26,6 +26,7 @@ include data-source
    
 |#
 
+# reused from last lab so I didnt have to re-type everything :)
 flight_53 = load-table:
   rownames :: Number,
   dep_time :: Number,
