@@ -103,10 +103,10 @@ total := total + 10
 total
 
 var my-var = initial-value
-for each(my-elt from my-list):
+#for each(my-elt from my-list):
   #code to handle my-elt
   #and update my-var
-end
+#end
 my-var #final result
 
 fun my-sum(num-list :: List) -> Number block:
