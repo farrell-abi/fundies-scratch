@@ -153,3 +153,17 @@ scatter-plot(final, "distance", "air_time")
 
 dists = extract distance from final end
 
+var total = 0
+var max = 0
+for each(d from dists)block:
+  total := total + d
+  when d > max:
+    max := d
+  end
+end
+
+average = total / dists.length()
+
+total
+average
+max
