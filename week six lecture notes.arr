@@ -28,14 +28,14 @@ data Priority:
 end
 
 task-1-priority = low
-task-2-priority = high
-task-3-priority = medium
+task-2-priority = medium
+task-3-priority = high
 
 check:
   is-Priority(task-1-priority) is true
   is-low(task-1-priority) is true
-  is-medium(task-3-priority) is true
-  is-high(task-2-priority) is true
+  is-medium(task-2-priority) is true
+  is-high(task-3-priority) is true
 end
 
 data Task:
