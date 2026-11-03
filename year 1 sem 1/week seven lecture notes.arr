@@ -50,3 +50,25 @@ my-pos-nums([list:           -4]) is         my-pos-nums([list:          ])
 end
 
 #Position-based Selection
+fun my-alternating(l :: List<Number>) -> List<Number>:
+  cases (List) l:
+    |empty => empty
+    |link(f, r) =>
+      cases (List) r:
+        |empty => [list: f]
+        |link(fr, rr) =>
+          #fr = first of rest, rr = rest of rest
+          #we are not going to use fr, instead call the function on rr
+          link(f, my-alternating(rr))
+      end
+  end
+end
+
+check:
+  my-alternating([list: 1, 2, 3, 4, 5, 6]) is [list: 1, 3, 5]
+  my-alternating([list:   2, 3, 4, 5, 6]) is [list: 2, 4, 6]
+  my-alternating([list:       3, 4, 5, 6]) is [list:    3, 5]
+  my-alternating([list:          4, 5, 6]) is [list:    4, 6]
+end
+
+#Structural Problem over Relaxed Domains
