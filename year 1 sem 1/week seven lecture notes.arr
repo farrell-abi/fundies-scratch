@@ -72,3 +72,15 @@ check:
 end
 
 #Structural Problem over Relaxed Domains
+
+
+#Lecture two Notes
+
+#|
+fun f(fp :: Footprint) -> ...:
+cases
+| split(name, left, right) => ... f(left) ... f(right) ...
+|activity (name, kg)
+|#
+
+data Footprint:
