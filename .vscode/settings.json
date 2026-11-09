@@ -1,3 +1,10 @@
 {
-    "editor.renderControlCharacters": true
+    "editor.renderControlCharacters": false,
+    "chat.agent.sandbox.fileSystem.linux": {
+        
+        "denyRead": [],
+        "allowRead": [],
+        "allowWrite": [],
+        "denyWrite": []
+    }
 }
